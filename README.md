@@ -19,7 +19,8 @@ Work in Progress
 
 ## Results
 Show the images of yearly averaged data, maybe for one city?
-![Denver SNOW plot](src/Denver_TMAX_annual.png)
+
+![Denver SNOW plot](src/Denver_TMAX_annual.png 'Image Text')
 ![SNOW CI comparison](src/Denver_TMAX_annual_CI.png)
 
 some text
@@ -52,3 +53,4 @@ Explain the meaning of the slope, the CI bounds, and the prediction bounds.
 
 https://www.nature.com/scitable/knowledge/library/the-global-climate-system-74649049/')
 
+https://www.ncdc.noaa.gov/cdo-web/
