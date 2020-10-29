@@ -52,7 +52,11 @@ class GHCN_Loc():
     def set_range(self, start, end):
         # arguments start and end are datetime objects with Year, Month, Day
         # if method '.process' is run after this it will filter data in this range
-        self.start = self.dates.index(start)
+        if start in self.dates:
+            self.start = self.dates.index(start)
+        else:
+            self.start = self.dates.index(min(self.dates))
+        
         self.end = self.dates.index(end)+1
     
     def process(self):
@@ -76,7 +80,7 @@ class GHCN_Loc():
                                     'SNOW_sum' : yearly_snow,
                                     'SNWD_cnt' : yearly_snwd})
         
-    def stats(self, ax, agg_name, alpha=0.05):
+    def stats(self, ax, agg_name, alpha=0.05, to_plot=True):
         Y = self.agg_df[agg_name].values
         n = len(Y)
         X = np.ones((n, 2))
@@ -91,40 +95,44 @@ class GHCN_Loc():
         X_mdl = X[:,0]
         Y_mdl = X_mdl*params[0] + params[1]
         
-        ax.scatter(X[:,0], Y, c='b')
+        if to_plot:
+            ax.scatter(X[:,0], Y, c='b')
+
+
+    #         CI_L = {:.4f}.format(CI[0]).rstrip('0')
+    #         CI_H = {:.4f}.format(CI[1]).rstrip('0')
+            a = '{:.4f}'.format(alpha).rstrip('0')
+
+            mdl_label = 'Simple Linear Regression'
+    #         mdl_label = '''Fit Line, slope CI:[{:.4f},{:.4f}] 
+    #                     @ p = '''.format(CI[0], CI[1]) + a
+            ax.plot(X_mdl, Y_mdl, 'r', label=mdl_label)
+            ax.set_xlabel('Years', fontsize = 25)
+            ax.set_ylabel(ylabel_dict[agg_name], fontsize = 20)
+
+            ## Calculate the Confidence Interval bounds
+            ## 95% confidence that the mean of the dist. is within these bounds
+            sigma = np.sqrt(((Y_mdl - Y)**2).sum()/(n-2))
+            t_stat = stats.t.ppf(1-alpha/2, n - 2)     # For two-tailed test
+            den = sum((X[:,0]-X[:,0].mean())**2)
+            interval = (X[:,0]-X[:,0].mean())/den
+            CI_interval = t_stat*sigma*np.sqrt((1/n) + interval)
+            CI_up_bound = Y_mdl + CI_interval
+            CI_low_bound = Y_mdl - CI_interval
+            ax.fill_between(X_mdl, CI_up_bound, CI_low_bound, facecolor=[1, 0, 0, 0.15], label='{:.2f} Confidence Bounds'.format(1-alpha))
+    #         ax.plot(X_mdl, CI_up_bound, 'r--', label='CI bounds')
+    #         ax.plot(X_mdl, CI_low_bound, 'r--')
+
+            ## Calculate the Prediction Interval bounds
+            ## 95% confidence that the mean of the dist. is within these bounds
+            PR_interval = t_stat*sigma*np.sqrt(1 + (1/n) + interval)
+            PR_up_bound = Y_mdl + PR_interval
+            PR_low_bound = Y_mdl - PR_interval
+    #         ax.plot(X_mdl, PR_up_bound, 'r.', label='Pred. bounds')
+    #         ax.plot(X_mdl, PR_low_bound, 'r.')
+            ax.fill_between(X_mdl, PR_up_bound, PR_low_bound, color=[1, 0, 0, 0.1], label='{:.2f} Prediction Bounds'.format(1-alpha))
         
-        
-#         CI_L = {:.4f}.format(CI[0]).rstrip('0')
-#         CI_H = {:.4f}.format(CI[1]).rstrip('0')
-        a = '{:.4f}'.format(alpha).rstrip('0')
-        
-        mdl_label = '''Fit Line, slope CI:[{:.4f},{:.4f}] 
-                    @ p = '''.format(CI[0], CI[1]) + a
-        ax.plot(X_mdl, Y_mdl, 'r', label=mdl_label)
-        ax.set_xlabel('Years', fontsize = 25)
-        ax.set_ylabel(ylabel_dict[agg_name], fontsize = 20)
-        
-        ## Calculate the Confidence Interval bounds
-        ## 95% confidence that the mean of the dist. is within these bounds
-        sigma = np.sqrt(((Y_mdl - Y)**2).sum()/(n-2))
-        t_stat = stats.t.ppf(1-alpha/2, n - 2)     # For two-tailed test
-        den = sum((X[:,0]-X[:,0].mean())**2)
-        interval = (X[:,0]-X[:,0].mean())/den
-        CI_interval = t_stat*sigma*np.sqrt((1/n) + interval)
-        CI_up_bound = Y_mdl + CI_interval
-        CI_low_bound = Y_mdl - CI_interval
-        ax.fill_between(X_mdl, CI_up_bound, CI_low_bound, facecolor=[1, 0, 0, 0.15], label='Confidence Bounds')
-#         ax.plot(X_mdl, CI_up_bound, 'r--', label='CI bounds')
-#         ax.plot(X_mdl, CI_low_bound, 'r--')
-        
-        ## Calculate the Prediction Interval bounds
-        ## 95% confidence that the mean of the dist. is within these bounds
-        PR_interval = t_stat*sigma*np.sqrt(1 + (1/n) + interval)
-        PR_up_bound = Y_mdl + PR_interval
-        PR_low_bound = Y_mdl - PR_interval
-        ax.fill_between(X_mdl, PR_up_bound, PR_low_bound, color=[1, 0, 0, 0.1], label='Prediction Bounds')
-#         ax.plot(X_mdl, PR_up_bound, 'r.', label='Pred. bounds')
-#         ax.plot(X_mdl, PR_low_bound, 'r.')
+        return CI
 
     
     def create_data_object(self, col_name):
