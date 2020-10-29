@@ -20,18 +20,17 @@ Work in Progress
 ## Results
 Show the images of yearly averaged data, maybe for one city?
 
-![Denver SNOW plot](src/Denver_TMAX_annual.png 'Image Text')
-![SNOW CI comparison](src/Denver_TMAX_annual_CI.png)
+![Denver SNOW plot](src/Denver_TMAX_annual_both.png 'Image Text')
 
 some text
 
-![Denver SNOW plot](src/Denver_SNOW_annual.png)
-![SNOW CI comparison](src/Denver_SNOW_annual_CI.png)
+![Denver SNOW plot](src/Denver_SNOW_annual_both.png)
 
-Some Text
 
-![Denver SNOW plot](src/Denver_PRCP_annual.png)
-![SNOW CI comparison](src/Denver_PRCP_annual_CI.png)
+some more Text
+
+![Denver SNOW plot](src/Denver_PRCP_annual_both.png)
+
 Show the stats in a table
 Show the images of seasonal (winter & summer) averaged data
 Show the stats in a table
