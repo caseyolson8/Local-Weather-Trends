@@ -48,6 +48,8 @@ class GHCN_Loc():
             self.latitude = 39.76746
             self.longitude = -104.86948
         self.start, self.end = trim_col_data(self.raw_df['TMAX'])
+        self.day_start = 0
+        self.day_stop = 366
         
     def set_range(self, start, end):
         # arguments start and end are datetime objects with Year, Month, Day
@@ -80,13 +82,40 @@ class GHCN_Loc():
                                     'SNOW_sum' : yearly_snow,
                                     'SNWD_cnt' : yearly_snwd})
         
-    def stats(self, ax, agg_name, alpha=0.05, to_plot=True):
-        Y = self.agg_df[agg_name].values
-        n = len(Y)
-        X = np.ones((n, 2))
-
-        X[:,0] = self.agg_df['Year'].values
+    def create_sampled_df(self):
+        rows = range(self.day_start,self.day_stop)
+        sample_prcp = pd.Series(self.PRCP.data_yr.iloc[rows,1:].sum().values, name = 'PRCP_sum')
+        sample_tmax = pd.Series(self.TMAX.data_yr.iloc[rows,1:].mean().values, name = 'TMAX_avg')
+        sample_tmin = pd.Series(self.TMIN.data_yr.iloc[rows,1:].mean().values, name = 'TMIN_avg')
+        sample_snow = pd.Series(self.SNOW.data_yr.iloc[rows,1:].sum().values, name = 'SNOW_sum')
+        sample_snwd = pd.Series((self.SNWD.data_yr.iloc[rows,1:]>0.0).sum().values, name = 'SNWD_cnt')
+        self.sampled_df = pd.DataFrame({'Year' : self.PRCP.data_yr.columns[1:],
+                                    'PRCP_sum' : sample_prcp,
+                                    'TMAX_avg' : sample_tmax,
+                                    'TMIN_avg' : sample_tmin,
+                                    'SNOW_sum' : sample_snow,
+                                    'SNWD_cnt' : sample_snwd})
         
+        
+        
+        
+        
+        
+    def stats(self, ax, agg_name, alpha=0.05, to_plot=True, sampled=False):
+
+
+        if sampled:
+            Y = self.sampled_df[agg_name].values
+            n = len(Y)
+            X = np.ones((n, 2))
+            X[:,0] = self.sampled_df['Year'].values        
+        else:
+            Y = self.agg_df[agg_name].values
+            n = len(Y)
+            X = np.ones((n, 2))
+            X[:,0] = self.agg_df['Year'].values        
+            
+
         model = linear_model.OLS(Y,X)
         results = model.fit()
         params = results.params
