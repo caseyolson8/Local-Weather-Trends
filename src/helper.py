@@ -5,7 +5,7 @@ from statsmodels.regression import linear_model
 import scipy.stats as stats
 
 
-########   DATA STORAGE CLASSES   ########
+########   Conversion Libraries   ########
 month_lst = []
 for dy in range(0,366):
     month_lst.append((datetime(2020,1,1)+timedelta(days=dy)).month)
@@ -30,8 +30,11 @@ ylabel_dict = { 'PRCP_sum' : 'Precipitation (inches)',
                
 
 
+########   DATA STORAGE CLASSES   ########
 
 class GHCN_Loc():
+    """Class for loading, parsing and storing relvant data from a GHCN site"""
+
     def __init__(self, pathway, filterbyloc = ''):
         if filterbyloc:
             temp = pd.read_csv(pathway, low_memory=False)
