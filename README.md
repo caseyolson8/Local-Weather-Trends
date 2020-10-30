@@ -1,55 +1,62 @@
 ![Camping Oct 2019](Report_Images/Big_Meadows_RMNP_crop.png)
 
-# Local Climate Trends: What is changing where?
+# Local Climate Trends: What is happening
 
-The earth's temperature is rising an average of 0.32 $^\circ$F per decade since 1981 [[1]](#1).  What are the trends where I live:  Are Denver summers actually getting hotter or drier and winters less snowy?  What are the trends in other regions?
+Global warming has on average driven temperatures up by 0.32 deg F per decade since 1981 [[1]](#1).  In any particular geographic location this trend may vary widely, furthermore the effects on weather are more unpredictable with some regions seeing increased rainfall and others drought.  
+Many of us have moved so often we wouldn't have witnessed a weather change where we live and memory is fallable anyhow.  So is the weather we're experiencing now very different than 30 years ago & if so how serious is the trend?  Second should we expect trends we've noticed in another city to continue in Denver?  Fortunately there are extensive public weather records to draw from and statistical analyses to inform.
 
 ## The Dataset
-Daily weather records from the past 70 years were collected from the GHCN (Global Historical Climatology Network) taken from selected weather stations in Denver, Seattle, Boston, and Baton Rouge. These datasets provide fairly reliable daily recordings of the high & low temperatures ```TMAX``` and ```TMIN``` in $^\circ$F, the precipitation ```PRCP``` in inches, and new snowfall ```SNOW``` in inches.
+Daily weather records from the past 70 years were collected from the GHCN (Global Historical Climatology Network, [[2]](#2)) taken from selected weather stations in Denver, Seattle, Boston, and Baton Rouge. These datasets provide fairly reliable daily recordings of the high & low temperatures ```TMAX``` and ```TMIN``` in $^\circ$F, the precipitation ```PRCP``` in inches, and new snowfall ```SNOW``` in inches.  Many records go back to the mid 19th century, though those I looked through had significant gaps up to the 1940's.  
+Shown below is the the daily temperature range and precipitation for Denver over the last year.
 ![image](images/Temp_2020.png)
 ![image](images/Prec_2020.png)
 
 
 ## Questions
-1. Using daily weather data from the previous 70 years calculate if average weather statistics are trending significantly from historical distributions
-    - H0:
-    - HA:    
-2. Compare any trends between different locations across the United States
-    - H0:
-    - HA:
+1. Are weather statistics in Denver trending significantly from historical distributions?
+    - H0:  The expected value of the regression slope (for the listed weather measurements) as a function of time is zero, meaning the expected value is unchanging over time.
+    - HA: The expected value of the regression slope is significantly unlikely to be zero
+2. Are the trends between different locations across the United States significantly different?
+    - H0:  The regression slopes in different cities are drawn from the same distribution
+    - HA:  The regression slopes in different cities are significantly different
 ## Methods/Statistical Analyses
-Work in Progress
+For each of the measured values (```TMAX```, ```SNOW```, ```PRCP```) in each city simple linear regression is performed and the slope expected value and 95% two-tailed confidence interval calculated.  If Zero is not within the confidence interval there is a statistically significant non-zero trend.  
+To compare trends between cities the confidence intervals are calculated for each at alpha=0.05 with an additional Bonferroni correction of 6, since there are 6 pair-wise comparisons between 4 cities.  If the bounds between 2 cities do not overlap they have significantly different trends.  
+Values are averaged annually and plotted to calculate trend lines.  The 95% confidence bounds are shaded (an estimate of the mean of the distribution) as well as the 95% probability bounds (where 95% of all samples should lie) [[3]](#3)).
 
 ## Results
-Show the images of yearly averaged data, maybe for one city?
+
+Trends in the daily high temperature in Denver and the confidence bounds of the slope compared to other cities.  All cities except Boston show a significant trend towards increasing temperature, analysis on the daily low temperature shows a similar trend.  The average increase in Denver is 0.19 deg F rise each decade.
 
 ![Denver SNOW plot](src/Denver_TMAX_annual_both.png)
 
-some text
+Trends in the yearly snowfall in Denver and the confidence bounds of the slope compared to other cities.  Denver and Seattle have significant decrease in snowfall, with the average rate in Denver at about 3.5 inches of snow less each decade.
 
 ![SNOW Annual plot](src/Denver_SNOW_annual_both.png)
 
-
-some more Text
+Trends in precipitation (rain and melted snow) for Denver with confidence intervals compared to other cities.  Only Baton Rouge has a significant trend in rainfall with an increase of ~2 inches each decade.
 
 ![PRCP Annual plot](src/Denver_PRCP_annual_both.png)
 
-Show the stats in a table
-SEASONAL
-![TMAX summer plot](src/Denver_TMAX_summer_both.png)
-![TMAX winter plot](src/Denver_TMAX_winter_both.png)
+Below is a comparison of each of hte cities for the 3 measured values using the Bonferroni correction.  In this case noe of the trends appear to be different between cities.  
 
-Show the images of seasonal (winter & summer) averaged data
-Show the stats in a table
-Show the rates as per decade
-
-How can we evaluate the difference in slopes from 2 different cities?
-- plot the confidence intervals for all cities in a 
+![TMAX summer plot](src/US_intervals_bonferroni.png)
 
 ## Discussion
-Explain the meaning of the slope, the CI bounds, and the prediction bounds. 
+In Denver there is a signifacant trend towards increased temperature and decreased snowfall with an average increase of 1.14 deg F since 1950 and a decreased expected annual snowfall of 24.64"!  Trends towards increasing temperature were similar across other cities though precipitation and snowfall varied.
 
+## Future Work
+- Fit the data to an improved regession model that takes into account the cyclic annual variations of each parameter.  Perhaps this would improve the statistical power when calculating expected distributions on any given date, opposed to over yearly averages & sums.
 
+## Additional Plots
+Seasonal trends in temperature for Denver
+![TMAX summer plot](src/Denver_TMAX_summer_both.png)
+
+![TMAX winter plot](src/Denver_TMAX_winter_both.png)
+
+Weather trends in a sample of Colorado towns
+
+![TMAX summer plot](src/Colorado_intervals_bonferroni.png)
 
 
 
@@ -57,6 +64,13 @@ Explain the meaning of the slope, the CI bounds, and the prediction bounds.
 <a id="1">[1]</a> 
 [Climate Change: Global Temperature, Lindsey, R. and Dahlman L (Aug. 1, 2020)]('https://www.climate.gov/news-features/understanding-climate/climate-change-global-temperature)
 
-https://www.nature.com/scitable/knowledge/library/the-global-climate-system-74649049/')
-
+<a id="2">[2]</a> 
 https://www.ncdc.noaa.gov/cdo-web/
+
+<a id="3">[3]</a> 
+http://nbviewer.ipython.org/github/demotu/BMC/blob/master/notebooks/CurveFitting.ipynb
+
+<a id="4">[4]</a> 
+https://www.nature.com/scitable/knowledge/library/the-global-climate-system-74649049/
+
+

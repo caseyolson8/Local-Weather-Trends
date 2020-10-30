@@ -10,8 +10,8 @@ In this exploratory study I would investigate long term weather trends within th
 
 In Denver County the GHCN provides longitudinal data collected across 109 stations over the past 80 years.  Of all these the most complete set is from the Stapleton location with continuous daily recordings collected from 1948 to the present day including measures of precipitation, snowfall, snow depth, temp. statistics, and weather events among others.  Below are examples of daily measures for the past year.
 
-![image](Temp_2020.png)
-![image](Prec_2020.png)
+![image](images/Temp_2020.png)
+![image](images/Prec_2020.png)
 
 ### Modelling
 
