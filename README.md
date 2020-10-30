@@ -3,7 +3,7 @@
 # Local Climate Trends: What is actually happening?
 
 Global warming has on average driven temperatures up by 0.32 deg F per decade since 1981 [[1]](#1).  In any particular geographic location this trend may vary widely, furthermore the effects on weather are more unpredictable with some regions seeing increased rainfall and others drought.  
-Many of us have moved so often we wouldn't have witnessed a weather change where we live and memory is fallable anyhow.  So is the weather we're experiencing now very different than 30 years ago & if so how serious is the trend?  Second should we expect trends we've noticed in another city to continue in Denver?  Fortunately there are extensive public weather records to draw from and statistical analyses to inform.
+Many of us have moved so often we wouldn't have witnessed a weather change where we live and memory is fallable anyhow.  So is the weather we're experiencing now very different than 30 years ago & if so how serious is the trend?  Second should we expect trends we've noticed in another city to continue in Denver?  Fortunately there are extensive public weather records to draw from and excellent statistical analyses have been developed to inform our hypotheses.
 
 ## The Dataset
 Daily weather records from the past 70 years were collected from the GHCN (Global Historical Climatology Network, [[2]](#2)) taken from selected weather stations in Denver, Seattle, Boston, and Baton Rouge. These datasets provide fairly reliable daily recordings of the high & low temperatures ```TMAX``` and ```TMIN``` in $^\circ$F, the precipitation ```PRCP``` in inches, and new snowfall ```SNOW``` in inches.  Many records go back to the mid 19th century, though those I looked through had significant gaps up to the 1940's.  
