@@ -20,7 +20,7 @@ Shown below is the the daily temperature range and precipitation for Denver over
     - H0:  The regression slopes in different cities are drawn from the same distribution
     - HA:  The regression slopes in different cities are significantly different
 ## Methods/Statistical Analyses
-For each of the measured values (```TMAX```, ```SNOW```, ```PRCP```) in each city simple linear regression is performed and the slope expected value and 95% two-tailed confidence interval calculated.  If Zero is not within the confidence interval there is a statistically significant non-zero trend.  
+For each of the measured values (```TMAX```, ```SNOW```, ```PRCP```) in each city (Denver, Seattle, Boston, Baton Rouge) simple linear regression is performed and the slope expected value and 95% two-tailed confidence interval calculated.  If Zero is not within the confidence interval there is a statistically significant non-zero trend.  
 To compare trends between cities the confidence intervals are calculated for each at alpha=0.05 with an additional Bonferroni correction of 6, since there are 6 pair-wise comparisons between 4 cities.  If the bounds between 2 cities do not overlap they have significantly different trends.  
 Values are averaged annually and plotted to calculate trend lines.  The 95% confidence bounds are shaded (an estimate of the mean of the distribution) as well as the 95% probability bounds (where 95% of all samples should lie) [[3]](#3)).
 
