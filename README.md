@@ -1,6 +1,6 @@
 ![Camping Oct 2019](Report_Images/Big_Meadows_RMNP_crop.png)
 
-# Local Climate Trends: What is actually happening?
+# Local Climate Trends: What is actually happening where I live?
 
 Global warming has on average driven temperatures up by 0.32 deg F per decade since 1981 [[1]](#1).  In any particular geographic location this trend may vary widely, furthermore the effects on weather are more unpredictable with some regions seeing increased rainfall and others drought.  
 Many of us have moved so often we wouldn't have witnessed a weather change where we live and memory is fallable anyhow.  So is the weather we're experiencing now very different than 30 years ago & if so how serious is the trend?  Second should we expect trends we've noticed in another city to continue in Denver?  Fortunately there are extensive public weather records to draw from and excellent statistical analyses have been developed to inform our hypotheses.
