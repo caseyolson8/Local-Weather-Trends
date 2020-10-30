@@ -28,19 +28,19 @@ To avoid modelling the cyclic annual behaviour weather statistics values were av
 
 Trends in the daily high temperature in Denver and the confidence bounds of the slope compared to other cities.  All cities except Boston show a significant trend towards increasing temperature, analysis on the daily low temperature shows a similar trend.  The average increase in Denver is 0.19 deg F rise each decade.
 
-![Denver SNOW plot](src/Denver_TMAX_annual_both.png)
+![Denver SNOW plot](images/Denver_TMAX_annual_both.png)
 
 Trends in the yearly snowfall in Denver and the confidence bounds of the slope compared to other cities.  Denver and Seattle have significant decrease in snowfall, with the average rate in Denver at about 3.5 inches of snow less each decade.
 
-![SNOW Annual plot](src/Denver_SNOW_annual_both.png)
+![SNOW Annual plot](images/Denver_SNOW_annual_both.png)
 
 Trends in precipitation (rain and melted snow) for Denver with confidence intervals compared to other cities.  Only Baton Rouge has a significant trend in rainfall with an increase of ~2 inches each decade.
 
-![PRCP Annual plot](src/Denver_PRCP_annual_both.png)
+![PRCP Annual plot](images/Denver_PRCP_annual_both.png)
 
 Below is a comparison of each of hte cities for the 3 measured values using the Bonferroni correction.  In this case noe of the trends appear to be different between cities.  
 
-![TMAX summer plot](src/US_intervals_bonferroni.png)
+![TMAX summer plot](images/US_intervals_bonferroni.png)
 
 ## Discussion
 In Denver there is a signifacant trend towards increased temperature and decreased snowfall with an average increase of 1.14 deg F since 1950 and a decreased expected annual snowfall of 24.64"!  Trends towards increasing temperature were similar across other cities though precipitation and snowfall varied.
@@ -50,13 +50,13 @@ In Denver there is a signifacant trend towards increased temperature and decreas
 
 ## Additional Plots
 Seasonal trends in temperature for Denver
-![TMAX summer plot](src/Denver_TMAX_summer_both.png)
+![TMAX summer plot](images/Denver_TMAX_summer_both.png)
 
-![TMAX winter plot](src/Denver_TMAX_winter_both.png)
+![TMAX winter plot](images/Denver_TMAX_winter_both.png)
 
 Weather trends in a sample of Colorado towns
 
-![TMAX summer plot](src/Colorado_intervals_bonferroni.png)
+![TMAX summer plot](images/Colorado_intervals_bonferroni.png)
 
 
 
