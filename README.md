@@ -1,4 +1,4 @@
-![Camping Oct 2019](Report_Images/Big_Meadows_RMNP_crop.png)
+![Camping Oct 2019](images/Big_Meadows_RMNP_crop.png)
 
 # Local Climate Trends: What is actually happening where I live?
 
